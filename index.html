@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
+:root{
+  --primary:#ca0d38;
+  --primary-dark:#8b0c2c;
+  --primary-light:#e699a9;
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --text-muted:#64748b}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{left:-100%}100%{left:100%}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(202,13,56,0.7)}60%{box-shadow:0 0 0 12px rgba(202,13,56,0)}}
+button{transition:all .3s}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:700}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+/* Header */
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);padding:24px 0}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
+.nav{display:flex;gap:32px;margin-left:auto}
+.nav a{font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--primary)}
+.cta-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(202,13,56,0.2);
+}
+.cta-btn:hover{box-shadow:0 4px 12px rgba(202,13,56,0.4);animation:pulse 2s infinite}
+header .cta-btn{animation:fadeInUp .8s forwards}
+header .cta-btn:hover{transform:scale(1.05)}
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%)}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top right,rgba(255,105,0,0.15) 0%,transparent 70%)
+}
+.hero-inner{max-width:800px;margin:auto;color:#fff;padding:80px 0;text-align:center}
+.hero-badge{background:var(--primary-light);color:#fff;padding:8px 20px;border-radius:8px;margin-bottom:24px;display:inline-block}
+.hero h1{font-size:4rem;line-height:1.1}
+.hero p{font-size:1.25rem;max-width:600px;margin:24px auto;color:rgba(255,255,255,0.9)}
+.hero .btn-group{display:flex;gap:16px;margin-top:32px}
+.hero .btn{
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s
+}
+.hero .btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+.hero .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+.hero .btn-secondary{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.hero .btn-secondary:hover{transform:scale(1.05);box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
+.hero .btn{animation:fadeInUp .8s forwards}
+.hero img{
+  max-width:100%;
+  border-radius:28px;
+  margin-top:40px;
+  transition:transform .3s
+}
+.hero img:hover{transform:scale(1.02)}
+/* Problem Cards */
+.problem-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.problem-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.problem-icon{
+  font-size:3rem;
+  color:var(--primary);
+  margin-bottom:16px;
+  animation:float 4s ease-in-out infinite}
+.problem-title{font-weight:600;margin-bottom:8px}
+.problem-text{font-size:1rem;color:var(--text-muted)}
+/* Services */
+.services-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.services-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.services-icon{
+  width:70px;height:70px;
+  background:var(--primary-light);
+  border-radius:50%;
+  margin:0 auto 16px;
+  animation:float 5s ease-in-out infinite
+}
+.services-title{font-weight:600;margin-bottom:8px}
+.services-text{font-size:1rem;color:var(--text-muted);line-height:1.5}
+/* Process */
+.process-step{
+  position:relative;
+  text-align:center;
+  margin-bottom:48px
+}
+.process-step-number{
+  position:absolute;
+  left:50%;
+  top:-40px;
+  transform:translateX(-50%);
+  width:70px;height:70px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
+  font-size:1.5rem;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.process-step-content{
+  position:relative;
+  z-index:2;
+}
+.process-step-number:hover{transform:scale(1.15)}
+/* FAQ */
+.faq-item{margin-bottom:24px}
+.faq-question{
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  padding-right:24px;
+}
+.faq-question::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  border-left:2px solid var(--primary);
+  border-bottom:2px solid var(--primary);
+  transition:transform .3s
+}
+.faq-question:hover::after{transform:rotate(45deg) translateX(2px)}
+.faq-answer{
+  padding:16px 0;
+  color:var(--text-muted);
+  display:none
+}
+.faq-item.active .faq-answer{display:block}
+/* CTA Section */
+.cta-section{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:80px 0;
+}
+.cta-section h2{color:#fff;margin-bottom:24px}
+.cta-section .btn-primary{animation:none}
+.cta-section .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+/* Footer */
+footer{
+  background:#1f2937;
+  color:#d1d5db;
+  padding:40px 0;
+  text-align:center;
+  font-size:0.9rem
+}
+footer a{color:#fff}
+footer .contact{margin-bottom:12px}
+footer .impressum{margin-top:12px;color:#fff}
+</style>
+
+<script id="wz-kontakt-script">
+document.addEventListener('DOMContentLoaded', function() {
+  var forms = document.querySelectorAll('form');
+  forms.forEach(function(form) {
+    if (form.__wzBound) return;
+    if (form.querySelector('input[type="email"]') && form.querySelector('textarea')) {
+      form.__wzBound = true;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var fd = new FormData(form);
+        var data = {
+          name: fd.get('name') || fd.get('Name') || '',
+          email: fd.get('email') || fd.get('Email') || '',
+          phone: fd.get('phone') || fd.get('telefon') || '',
+          message: fd.get('message') || fd.get('nachricht') || '',
+          firma: 'STADTBOTE',
+          demo_url: window.location.href
+        };
+        var btn = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (btn) btn.disabled = true;
+
+        fetch('https://e0ea-91-10-143-172.ngrok-free.app/webhook/kontakt-formular', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          alert(res && res.success ? 'Danke! Wir melden uns.' : 'Fehler: ' + (res && res.message ? res.message : 'Unbekannt'));
+          if (res && res.success) form.reset();
+        })
+        .catch(function(){
+          alert('Fehler. Bitte kontakt@agentflowm.de kontaktieren.');
+        })
+        .finally(function(){
+          if (btn) btn.disabled = false;
+        });
+      });
+    }
+  });
+});
+</script>
+
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
+:root{
+  --primary:#ca0d38;
+  --primary-dark:#8b0c2c;
+  --primary-light:#e699a9;
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --text-muted:#64748b}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{left:-100%}100%{left:100%}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(202,13,56,0.7)}60%{box-shadow:0 0 0 12px rgba(202,13,56,0)}}
+button{transition:all .3s}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:700}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+/* Header */
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);padding:24px 0}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
+.nav{display:flex;gap:32px;margin-left:auto}
+.nav a{font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--primary)}
+.cta-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(202,13,56,0.2);
+}
+.cta-btn:hover{box-shadow:0 4px 12px rgba(202,13,56,0.4);animation:pulse 2s infinite}
+header .cta-btn{animation:fadeInUp .8s forwards}
+header .cta-btn:hover{transform:scale(1.05)}
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%)}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top right,rgba(255,105,0,0.15) 0%,transparent 70%)
+}
+.hero-inner{max-width:800px;margin:auto;color:#fff;padding:80px 0;text-align:center}
+.hero-badge{background:var(--primary-light);color:#fff;padding:8px 20px;border-radius:8px;margin-bottom:24px;display:inline-block}
+.hero h1{font-size:4rem;line-height:1.1}
+.hero p{font-size:1.25rem;max-width:600px;margin:24px auto;color:rgba(255,255,255,0.9)}
+.hero .btn-group{display:flex;gap:16px;margin-top:32px}
+.hero .btn{
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s
+}
+.hero .btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+.hero .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+.hero .btn-secondary{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.hero .btn-secondary:hover{transform:scale(1.05);box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
+.hero .btn{animation:fadeInUp .8s forwards}
+.hero img{
+  max-width:100%;
+  border-radius:28px;
+  margin-top:40px;
+  transition:transform .3s
+}
+.hero img:hover{transform:scale(1.02)}
+/* Problem Cards */
+.problem-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.problem-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.problem-icon{
+  font-size:3rem;
+  color:var(--primary);
+  margin-bottom:16px;
+  animation:float 4s ease-in-out infinite}
+.problem-title{font-weight:600;margin-bottom:8px}
+.problem-text{font-size:1rem;color:var(--text-muted)}
+/* Services */
+.services-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.services-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.services-icon{
+  width:70px;height:70px;
+  background:var(--primary-light);
+  border-radius:50%;
+  margin:0 auto 16px;
+  animation:float 5s ease-in-out infinite
+}
+.services-title{font-weight:600;margin-bottom:8px}
+.services-text{font-size:1rem;color:var(--text-muted);line-height:1.5}
+/* Process */
+.process-step{
+  position:relative;
+  text-align:center;
+  margin-bottom:48px
+}
+.process-step-number{
+  position:absolute;
+  left:50%;
+  top:-40px;
+  transform:translateX(-50%);
+  width:70px;height:70px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
+  font-size:1.5rem;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.process-step-content{
+  position:relative;
+  z-index:2;
+}
+.process-step-number:hover{transform:scale(1.15)}
+/* FAQ */
+.faq-item{margin-bottom:24px}
+.faq-question{
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  padding-right:24px;
+}
+.faq-question::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  border-left:2px solid var(--primary);
+  border-bottom:2px solid var(--primary);
+  transition:transform .3s
+}
+.faq-question:hover::after{transform:rotate(45deg) translateX(2px)}
+.faq-answer{
+  padding:16px 0;
+  color:var(--text-muted);
+  display:none
+}
+.faq-item.active .faq-answer{display:block}
+/* CTA Section */
+.cta-section{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:80px 0;
+}
+.cta-section h2{color:#fff;margin-bottom:24px}
+.cta-section .btn-primary{animation:none}
+.cta-section .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+/* Footer */
+footer{
+  background:#1f2937;
+  color:#d1d5db;
+  padding:40px 0;
+  text-align:center;
+  font-size:0.9rem
+}
+footer a{color:#fff}
+footer .contact{margin-bottom:12px}
+footer .impressum{margin-top:12px;color:#fff}
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
+:root{
+  --primary:#ca0d38;
+  --primary-dark:#8b0c2c;
+  --primary-light:#e699a9;
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --text-muted:#64748b}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(202,13,56,0.7)}60%{box-shadow:0 0 0 12px rgba(202,13,56,0)}}
+button{transition:all .3s}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:700}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+/* Header */
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);padding:24px 0}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
+.nav{display:flex;gap:32px;margin-left:auto}
+.nav a{font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--primary)}
+.cta-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(202,13,56,0.2);
+}
+.cta-btn:hover{box-shadow:0 4px 12px rgba(202,13,56,0.4);animation:pulse 2s infinite}
+header .cta-btn{animation:fadeInUp .8s forwards}
+header .cta-btn:hover{transform:scale(1.05)}
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%)}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top right,rgba(255,105,0,0.15) 0%,transparent 70%)
+}
+.hero-inner{max-width:800px;margin:auto;color:#fff;padding:80px 0;text-align:center}
+.hero-badge{background:var(--primary-light);color:#fff;padding:8px 20px;border-radius:8px;margin-bottom:24px;display:inline-block}
+.hero h1{font-size:4rem;line-height:1.1}
+.hero p{font-size:1.25rem;max-width:600px;margin:24px auto;color:rgba(255,255,255,0.9)}
+.hero .btn-group{display:flex;gap:16px;margin-top:32px}
+.hero .btn{
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s
+}
+.hero .btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+.hero .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+.hero .btn-secondary{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.hero .btn-secondary:hover{transform:scale(1.05);box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
+.hero .btn{animation:fadeInUp .8s forwards}
+.hero img{
+  max-width:100%;
+  border-radius:28px;
+  margin-top:40px;
+  transition:transform .3s
+}
+.hero img:hover{transform:scale(1.02)}
+/* Problem Cards */
+.problem-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.problem-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.problem-icon{
+  font-size:3rem;
+  color:var(--primary);
+  margin-bottom:16px;
+  animation:float 4s ease-in-out infinite
+}
+.problem-title{font-weight:600;margin-bottom:8px}
+.problem-text{font-size:1rem;color:var(--text-muted)}
+/* Services */
+.services-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.services-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.services-icon{
+  width:70px;height:70px;
+  background:var(--primary-light);
+  border-radius:50%;
+  margin:0 auto 16px;
+  animation:float 5s ease-in-out infinite
+}
+.services-title{font-weight:600;margin-bottom:8px}
+.services-text{font-size:1rem;color:var(--text-muted);line-height:1.5}
+/* Process */
+.process-step{
+  position:relative;
+  text-align:center;
+  margin-bottom:48px
+}
+.process-step-number{
+  position:absolute;
+  left:50%;
+  top:-40px;
+  transform:translateX(-50%);
+  width:70px;height:70px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
+  font-size:1.5rem;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.process-step-content{
+  position:relative;
+  z-index:2;
+}
+.process-step-number:hover{transform:scale(1.15)}
+/* FAQ */
+.faq-item{margin-bottom:24px}
+.faq-question{
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  padding-right:24px;
+}
+.faq-question::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  border-left:2px solid var(--primary);
+  border-bottom:2px solid var(--primary);
+  transition:transform .3s
+}
+.faq-question:hover::after{transform:rotate(45deg) translateX(2px)}
+.faq-answer{
+  padding:16px 0;
+  color:var(--text-muted);
+  display:none}
+.faq-item.active .faq-answer{display:block}
+/* CTA Section */
+.cta-section{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:80px 0;
+}
+.cta-section h2{color:#fff;margin-bottom:24px}
+.cta-section .btn-primary{animation:none}
+.cta-section .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+/* Footer */
+footer{
+  background:#1f2937;
+  color:#d1d5db;
+  padding:40px 0;
+  text-align:center;
+  font-size:0.9rem
+}
+footer a{color:#fff}
+footer .contact{margin-bottom:12px}
+footer .impressum{margin-top:12px;color:#fff}
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
+:root{
+  --primary:#ca0d38;
+  --primary-dark:#8b0c2c;
+  --primary-light:#e699a9;
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --text-muted:#64748b
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(202,13,56,0.7)}60%{box-shadow:0 0 0 12px rgba(202,13,56,0)}}
+button{transition:all .3s}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:700}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+/* Header */
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);padding:24px 0}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
+.nav{display:flex;gap:32px;margin-left:auto}
+.nav a{font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--primary)}
+.cta-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(202,13,56,0.2);
+}
+.cta-btn:hover{box-shadow:0 4px 12px rgba(202,13,56,0.4);animation:pulse 2s infinite}
+header .cta-btn{animation:fadeInUp .8s forwards}
+header .cta-btn:hover{transform:scale(1.05)}
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%)}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top right,rgba(255,105,0,0.15) 0%,transparent 70%)
+}
+.hero-inner{max-width:800px;margin:auto;color:#fff;padding:80px 0;text-align:center}
+.hero-badge{background:var(--primary-light);color:#fff;padding:8px 20px;border-radius:8px;margin-bottom:24px;display:inline-block}
+.hero h1{font-size:4rem;line-height:1.1}
+.hero p{font-size:1.25rem;max-width:600px;margin:24px auto;color:rgba(255,255,255,0.9)}
+.hero .btn-group{display:flex;gap:16px;margin-top:32px}
+.hero .btn{
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s
+}
+.hero .btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+.hero .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+.hero .btn-secondary{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.hero .btn-secondary:hover{transform:scale(1.05);box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
+.hero .btn{animation:fadeInUp .8s forwards}
+.hero img{
+  max-width:100%;
+  border-radius:28px;
+  margin-top:40px;
+  transition:transform .3s
+}
+.hero img:hover{transform:scale(1.02)}
+/* Problem Cards */
+.problem-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.problem-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.problem-icon{
+  font-size:3rem;
+  color:var(--primary);
+  margin-bottom:16px;
+  animation:float 4s ease-in-out infinite
+}
+.problem-title{font-weight:600;margin-bottom:8px}
+.problem-text{font-size:1rem;color:var(--text-muted)}
+/* Services */
+.services-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.services-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.services-icon{
+  width:70px;height:70px;
+  background:var(--primary-light);
+  border-radius:50%;
+  margin:0 auto 16px;
+  animation:float 5s ease-in-out infinite
+}
+.services-title{font-weight:600;margin-bottom:8px}
+.services-text{font-size:1rem;color:var(--text-muted);line-height:1.5}
+/* Process */
+.process-step{
+  position:relative;
+  text-align:center;
+  margin-bottom:48px
+}
+.process-step-number{
+  position:absolute;
+  left:50%;
+  top:-40px;
+  transform:translateX(-50%);
+  width:70px;height:70px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
+  font-size:1.5rem;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.process-step-content{
+  position:relative;
+  z-index:2;
+}
+.process-step-number:hover{transform:scale(1.15)}
+/* FAQ */
+.faq-item{margin-bottom:24px}
+.faq-question{
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  padding-right:24px;
+}
+.faq-question::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  border-left:2px solid var(--primary);
+  border-bottom:2px solid var(--primary);
+  transition:transform .3s
+}
+.faq-question:hover::after{transform:rotate(45deg) translateX(2px)}
+.faq-answer{
+  padding:16px 0;
+  color:var(--text-muted);
+  display:none
+}
+.faq-item.active .faq-answer{display:block}
+/* CTA Section */
+.cta-section{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:80px 0;
+}
+.cta-section h2{color:#fff;margin-bottom:24px}
+.cta-section .btn-primary{animation:none}
+.cta-section .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+/* Footer */
+footer{
+  background:#1f2937;
+  color:#d1d5db;
+  padding:40px 0;
+  text-align:center;
+  font-size:0.9rem
+}
+footer a{color:#fff}
+footer .contact{margin-bottom:12px}
+footer .impressum{margin-top:12px;color:#fff}
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
+:root{
+  --primary:#ca0d38;
+  --primary-dark:#8b0c2c;
+  --primary-light:#e699a9;
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --text-muted:#64748b
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(202,13,56,0.7)}60%{box-shadow:0 0 0 12px rgba(202,13,56,0)}}
+button{transition:all .3s}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:700}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+/* Header */
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);padding:24px 0}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
+.nav{display:flex;gap:32px;margin-left:auto}
+.nav a{font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--primary)}
+.cta-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(202,13,56,0.2);
+}
+.cta-btn:hover{box-shadow:0 4px 12px rgba(202,13,56,0.4);animation:pulse 2s infinite}
+header .cta-btn{animation:fadeInUp .8s forwards}
+header .cta-btn:hover{transform:scale(1.05)}
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%)}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top right,rgba(255,105,0,0.15) 0%,transparent 70%)
+}
+.hero-inner{max-width:800px;margin:auto;color:#fff;padding:80px 0;text-align:center}
+.hero-badge{background:var(--primary-light);color:#fff;padding:8px 20px;border-radius:8px;margin-bottom:24px;display:inline-block}
+.hero h1{font-size:4rem;line-height:1.1}
+.hero p{font-size:1.25rem;max-width:600px;margin:24px auto;color:rgba(255,255,255,0.9)}
+.hero .btn-group{display:flex;gap:16px;margin-top:32px}
+.hero .btn{
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s
+}
+.hero .btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+.hero .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+.hero .btn-secondary{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.hero .btn-secondary:hover{transform:scale(1.05);box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
+.hero .btn{animation:fadeInUp .8s forwards}
+.hero img{
+  max-width:100%;
+  border-radius:28px;
+  margin-top:40px;
+  transition:transform .3s
+}
+.hero img:hover{transform:scale(1.02)}
+/* Problem Cards */
+.problem-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.problem-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.problem-icon{
+  font-size:3rem;
+  color:var(--primary);
+  margin-bottom:16px;
+  animation:float 4s ease-in-out infinite
+}
+.problem-title{font-weight:600;margin-bottom:8px}
+.problem-text{font-size:1rem;color:var(--text-muted)}
+/* Services */
+.services-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.services-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.services-icon{
+  width:70px;height:70px;
+  background:var(--primary-light);
+  border-radius:50%;
+  margin:0 auto 16px;
+  animation:float 5s ease-in-out infinite
+}
+.services-title{font-weight:600;margin-bottom:8px}
+.services-text{font-size:1rem;color:var(--text-muted);line-height:1.5}
+/* Process */
+.process-step{
+  position:relative;
+  text-align:center;
+  margin-bottom:48px
+}
+.process-step-number{
+  position:absolute;
+  left:50%;
+  top:-40px;
+  transform:translateX(-50%);
+  width:70px;height:70px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
+  font-size:1.5rem;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.process-step-content{
+  position:relative;
+  z-index:2;
+}
+.process-step-number:hover{transform:scale(1.15)}
+/* FAQ */
+.faq-item{margin-bottom:24px}
+.faq-question{
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  padding-right:24px;
+}
+.faq-question::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  border-left:2px solid var(--primary);
+  border-bottom:2px solid var(--primary);
+  transition:transform .3s
+}
+.faq-question:hover::after{transform:rotate(45deg) translateX(2px)}
+.faq-answer{
+  padding:16px 0;
+  color:var(--text-muted);
+  display:none
+}
+.faq-item.active .faq-answer{display:block}
+/* CTA Section */
+.cta-section{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:80px 0;
+}
+.cta-section h2{color:#fff;margin-bottom:24px}
+.cta-section .btn-primary{animation:none}
+.cta-section .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+/* Footer */
+footer{
+  background:#1f2937;
+  color:#d1d5db;
+  padding:40px 0;
+  text-align:center;
+  font-size:0.9rem
+}
+footer a{color:#fff}
+footer .contact{margin-bottom:12px}
+footer .impressum{margin-top:12px;color:#fff}
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
+:root{
+  --primary:#ca0d38;
+  --primary-dark:#8b0c2c;
+  --primary-light:#e699a9;
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --text-muted:#64748b
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(202,13,56,0.7)}60%{box-shadow:0 0 0 12px rgba(202,13,56,0)}}
+button{transition:all .3s}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:700}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+/* Header */
+header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);padding:24px 0}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
+.nav{display:flex;gap:32px;margin-left:auto}
+.nav a{font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--primary)}
+.cta-btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(202,13,56,0.2);
+}
+.cta-btn:hover{box-shadow:0 4px 12px rgba(202,13,56,0.4);animation:pulse 2s infinite}
+header .cta-btn{animation:fadeInUp .8s forwards}
+header .cta-btn:hover{transform:scale(1.05)}
+/* Hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%)}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top right,rgba(255,105,0,0.15) 0%,transparent 70%)
+}
+.hero-inner{max-width:800px;margin:auto;color:#fff;padding:80px 0;text-align:center}
+.hero-badge{background:var(--primary-light);color:#fff;padding:8px 20px;border-radius:8px;margin-bottom:24px;display:inline-block}
+.hero h1{font-size:4rem;line-height:1.1}
+.hero p{font-size:1.25rem;max-width:600px;margin:24px auto;color:rgba(255,255,255,0.9)}
+.hero .btn-group{display:flex;gap:16px;margin-top:32px}
+.hero .btn{
+  padding:12px 24px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s
+}
+.hero .btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+.hero .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+.hero .btn-secondary{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.5);
+}
+.hero .btn-secondary:hover{transform:scale(1.05);box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
+.hero .btn{animation:fadeInUp .8s forwards}
+.hero img{
+  max-width:100%;
+  border-radius:28px;
+  margin-top:40px;
+  transition:transform .3s
+}
+.hero img:hover{transform:scale(1.02)}
+/* Problem Cards */
+.problem-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.problem-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.problem-icon{
+  font-size:3rem;
+  color:var(--primary);
+  margin-bottom:16px;
+  animation:float 4s ease-in-out infinite
+}
+.problem-title{font-weight:600;margin-bottom:8px}
+.problem-text{font-size:1rem;color:var(--text-muted)}
+/* Services */
+.services-card{
+  background:var(--surface);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:transform .3s,box-shadow .3s
+}
+.services-card:hover{transform:translateY(-12px);box-shadow:0 12px 20px rgba(0,0,0,0.1)}
+.services-icon{
+  width:70px;height:70px;
+  background:var(--primary-light);
+  border-radius:50%;
+  margin:0 auto 16px;
+  animation:float 5s ease-in-out infinite
+}
+.services-title{font-weight:600;margin-bottom:8px}
+.services-text{font-size:1rem;color:var(--text-muted);line-height:1.5}
+/* Process */
+.process-step{
+  position:relative;
+  text-align:center;
+  margin-bottom:48px
+}
+.process-step-number{
+  position:absolute;
+  left:50%;
+  top:-40px;
+  transform:translateX(-50%);
+  width:70px;height:70px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
+  font-size:1.5rem;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.process-step-content{
+  position:relative;
+  z-index:2;
+}
+.process-step-number:hover{transform:scale(1.15)}
+/* FAQ */
+.faq-item{margin-bottom:24px}
+.faq-question{
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  padding-right:24px;
+}
+.faq-question::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;
+  height:16px;
+  border-left:2px solid var(--primary);
+  border-bottom:2px solid var(--primary);
+  transition:transform .3s
+}
+.faq-question:hover::after{transform:rotate(45deg) translateX(2px)}
+.faq-answer{
+  padding:16px 0;
+  color:var(--text-muted);
+  display:none
+}
+.faq-item.active .faq-answer{display:block}
+/* CTA Section */
+.cta-section{
+  background:var(--primary);
+  color:#fff;
+  text-align:center;
+  padding:80px 0;
+}
+.cta-section h2{color:#fff;margin-bottom:24px}
+.cta-section .btn-primary{animation:none}
+.cta-section .btn-primary:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(202,13,56,0.4)}
+/* Footer */
+footer{
+  background:#1f2937;
+  color:#d1d5db;
+  padding:40px 0;
+  text-align:center;
+  font-size:0.9rem
+}
+footer a{color:#fff}
+footer .contact{margin-bottom:12px}
+footer .impressum{margin-top:12px;color:#fff}
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STADTBOTE — Kurierdienst Berlin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;8
